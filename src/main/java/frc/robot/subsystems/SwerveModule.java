@@ -1,19 +1,11 @@
 package frc.robot.subsystems;
 
-<<<<<<< HEAD:NeoSwerve2024/src/main/java/frc/robot/subsystems/SwerveModule.java
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-=======
-import com.ctre.phoenix.sensors.CANCoder;
->>>>>>> origin/master:src/main/java/frc/robot/subsystems/SwerveModule.java
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.RelativeEncoder;
-<<<<<<< HEAD:NeoSwerve2024/src/main/java/frc/robot/subsystems/SwerveModule.java
 import com.ctre.phoenix6.hardware.CANcoder;
-=======
-import com.revrobotics.CANSparkMax.IdleMode;
->>>>>>> origin/master:src/main/java/frc/robot/subsystems/SwerveModule.java
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -53,29 +45,18 @@ public class SwerveModule implements IDashboardProvider {
         this.driveMotor.setInverted(driveMotorReversed);
         this.turningMotor.setInverted(turningMotorReversed);
 
-<<<<<<< HEAD:NeoSwerve2024/src/main/java/frc/robot/subsystems/SwerveModule.java
         this.driveMotor.setSmartCurrentLimit(20);
         this.turningMotor.setSmartCurrentLimit(20);
 
         this.driveEncoder = this.driveMotor.getEncoder();
         this.turningEncoder = new CANcoder(turningEncoderPort);
-=======
-        this.driveEncoder = this.driveMotor.getEncoder();
-        this.turningEncoder = new CANCoder(turningEncoderPort);
-
-        this.turningEncoder.configFactoryDefault();
->>>>>>> origin/master:src/main/java/frc/robot/subsystems/SwerveModule.java
 
         this.driveEncoder.setPositionConversionFactor(2.0 * Math.PI * RobotConstants.WHEEL_RADIUS / RobotConstants.GEAR_RATIO);
         this.driveEncoder.setVelocityConversionFactor(2.0 * Math.PI * RobotConstants.WHEEL_RADIUS / RobotConstants.GEAR_RATIO / 60.0);
 
         this.turningPIDController = new PIDController(DriveConstants.kP, DriveConstants.kI, DriveConstants.kD);
-<<<<<<< HEAD:NeoSwerve2024/src/main/java/frc/robot/subsystems/SwerveModule.java
         this.turningPIDController.enableContinuousInput(-180, 180);
-=======
-        this.turningPIDController.enableContinuousInput(-Math.PI, Math.PI);
->>>>>>> origin/master:src/main/java/frc/robot/subsystems/SwerveModule.java
-        
+
         this.absoluteEncoderOffset = absoluteEncoderOffset;
     }
 
@@ -108,11 +89,7 @@ public class SwerveModule implements IDashboardProvider {
         SwerveModuleState state = SwerveModuleState.optimize(desiredState, this.getState().angle);
 
         this.driveOutput = state.speedMetersPerSecond / RobotConstants.PHYSICAL_MAX_SPEED_METERS_PER_SECOND;
-<<<<<<< HEAD:NeoSwerve2024/src/main/java/frc/robot/subsystems/SwerveModule.java
         this.turnOutput = this.turningPIDController.calculate(this.getState().angle.getDegrees(), state.angle.getDegrees());
-=======
-        this.turnOutput = this.turningPIDController.calculate(this.getState().angle.getRadians(), state.angle.getRadians());
->>>>>>> origin/master:src/main/java/frc/robot/subsystems/SwerveModule.java
 
         this.driveMotor.set(this.driveOutput);
         this.turningMotor.set(this.turnOutput);
@@ -128,11 +105,7 @@ public class SwerveModule implements IDashboardProvider {
         SmartDashboard.putNumber(this.name + " DrivePosition", this.driveEncoder.getPosition());
         SmartDashboard.putNumber(this.name + " DriveVelocity", this.driveEncoder.getVelocity());
         SmartDashboard.putNumber(this.name + " TurnPosition", this.getTurningPosition());
-<<<<<<< HEAD:NeoSwerve2024/src/main/java/frc/robot/subsystems/SwerveModule.java
         SmartDashboard.putNumber(this.name + " TurnVelocity", this.turningEncoder.getVelocity().getValue());
-=======
-        SmartDashboard.putNumber(this.name + " TurnVelocity", this.turningEncoder.getVelocity());
->>>>>>> origin/master:src/main/java/frc/robot/subsystems/SwerveModule.java
         SmartDashboard.putNumber(this.name + " DriveSpeed", this.driveOutput);
         SmartDashboard.putNumber(this.name + " TurnSpeed", this.turnOutput);
     }
