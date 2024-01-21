@@ -28,6 +28,8 @@ public class Constants {
             public static final int frontRightTurn = 5;
             public static final int backwardLeftTurn = 3;
             public static final int backwardRightTurn = 8;
+            public static final int intakeLeft = 14;
+            public static final int intakeRight = 13;
         }
         public static final class Encoders {
             public static final int frontLeft = 9;
@@ -47,7 +49,7 @@ public class Constants {
     public static final class AutoConstants {
         public static final double PHYSICAL_MAX_SPEED = 1.0; // m/s
         public static final double PHYSICAL_MAX_ACCELERATION = 0.5; // m/s^2
-        public static final String PATH_NAME = "New Path";
+        public static final String PATH_NAME = "Test";
     }
 
     public static final class VisionConstants {

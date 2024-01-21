@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
@@ -9,11 +11,6 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
-<<<<<<< HEAD:NeoSwerve2024/src/main/java/frc/robot/commands/SwerveDriveCommand.java
-=======
-
->>>>>>> origin/master:src/main/java/frc/robot/commands/SwerveDriveCommand.java
-
 
 public class SwerveDriveCommand extends Command {
     private final SwerveSubsystem subsystem;
@@ -34,20 +31,20 @@ public class SwerveDriveCommand extends Command {
 
     @Override
     public void execute() {
-        double xSpeed = (MathUtil.applyDeadband(-controller.getLeftY(), DriveConstants.DEAD_BAND));
-        double ySpeed = MathUtil.applyDeadband(-controller.getLeftX(), DriveConstants.DEAD_BAND);
-        double rotation = MathUtil.applyDeadband(-controller.getRightX(), DriveConstants.DEAD_BAND);
+        double xSpeed = (MathUtil.applyDeadband(-this.controller.getLeftY(), DriveConstants.DEAD_BAND));
+        double ySpeed = MathUtil.applyDeadband(-this.controller.getLeftX(), DriveConstants.DEAD_BAND);
+        double rotation = MathUtil.applyDeadband(-this.controller.getRightX(), DriveConstants.DEAD_BAND);
+
+        if (this.controller.getBButton()) {
+            this.subsystem.resetPose(new Pose2d(2., 7., new Rotation2d()));
+        }
 
         this.subsystem.drive(
-                xSpeedLimiter.calculate(xSpeed) * DriveConstants.MAX_SPEED,
-                ySpeedLimiter.calculate(ySpeed) * DriveConstants.MAX_SPEED,
-                rotateLimiter.calculate(rotation) * DriveConstants.MAX_ANGULAR_SPEED,
+                this.xSpeedLimiter.calculate(xSpeed) * DriveConstants.MAX_SPEED,
+                this.ySpeedLimiter.calculate(ySpeed) * DriveConstants.MAX_SPEED,
+                this.rotateLimiter.calculate(rotation) * DriveConstants.MAX_ANGULAR_SPEED,
                 true
         );
-    }
-
-    private double speedACurve(double speed) {
-        return speed * pow(abs(speed), 2);
     }
 
     @Override
